@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./App.css";
 import Analytics from './components/Analytics';
 
 const App = () => {

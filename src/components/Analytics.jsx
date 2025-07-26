@@ -1,4 +1,5 @@
 import React from 'react';
+import "../Analytics.css";
 
 const Analytics = ({ items = [] }) => {
   return (

@@ -1,0 +1,13 @@
+.border {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.text-xl {
+  color: #eab308;
+}
+
+.my-1 {
+  margin: 0.5rem 0;
+}
