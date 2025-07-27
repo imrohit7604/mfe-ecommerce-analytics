@@ -3,15 +3,23 @@ import "../Analytics.css";
 
 const Analytics = ({ items = [] }) => {
   return (
-    <div className="border p-4">
-      <h2 className="text-xl font-bold mb-2">📊 Analytics</h2>
-      <p>Total Items: {items.length}</p>
-      {items.length > 0 && (
-        <div>
-          <p>Last Item Added: {items[items.length - 1]}</p>
-          <p>All Items: {items.join(', ')}</p>
-        </div>
-      )}
+    <div className="analytics-container">
+      <h2 className="analytics-title">📊 Analytics</h2>
+      <div className="analytics-data">
+        <p>
+          <strong>Total Items:</strong>
+          {items.length}
+        </p>
+        {items.length > 0 && (
+          <>
+            <p>
+              <strong>Last Item Added:</strong>
+              {items[items.length - 1]}
+            </p>
+            <p><strong>All Items:</strong> {items.join(', ')}</p>
+          </>
+        )}
+      </div>
     </div>
   );
 };
