@@ -1,19 +1,22 @@
-    const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const Dotenv = require("dotenv-webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 module.exports = {
-  entry: './src/index.js',
-  mode: 'development',
+  entry: "./src/index.js",
+  mode: "development",
   devServer: {
     port: 3003,
     historyApiFallback: true,
   },
   output: {
-    publicPath: 'auto',
+    path: require("path").resolve(__dirname, "public"),
+    filename: "main.[contenthash].js",
+    publicPath: process.env.PUBLIC_PATH,
     clean: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -21,29 +24,31 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   plugins: [
+    new Dotenv(),
     new ModuleFederationPlugin({
-      name: 'analytics',
-      filename: 'remoteEntry.js',
+      name: "analytics",
+      filename: "remoteEntry.js",
       exposes: {
-        './Analytics': './src/components/Analytics',
+        "./Analytics": "./src/components/Analytics",
       },
       shared: {
         react: { singleton: true },
-        'react-dom': { singleton: true },
+        "react-dom": { singleton: true },
       },
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: "./public/index.html",
+      inject: "body",
     }),
   ],
 };
